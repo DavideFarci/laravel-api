@@ -19,5 +19,5 @@ use App\Http\Controllers\Api\ProjectController;
 //     return $request->user();
 // });
 
-route::get('projects', [ProjectController::class, 'index'])->name('api.projects.index');
-Route::get('projects/{project}', [PostController::class, 'show'])->name('api.projects.show');
+Route::get('projects', [ProjectController::class, 'index'])->name('api.projects.index');
+Route::get('projects/{project}', [ProjectController::class, 'show'])->name('api.projects.show');
