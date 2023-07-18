@@ -15,8 +15,11 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $project = Project::with('type', 'languages')->paginate(5);
-        return response()->json($project);
+        $projects = Project::with('type', 'languages')->paginate(5);
+        return response()->json([
+            'success'   => true,
+            'data'      => $projects,
+        ]);;
     }
 
     /**
@@ -28,6 +31,9 @@ class ProjectController extends Controller
     public function show($slug)
     {
         $project = Project::where('slug', $slug)->firstOrFail();
-        return response()->json($project);
+        return response()->json([
+            'success'   => $project ? true : false,
+            'data'      => $project,
+        ]);
     }
 }
