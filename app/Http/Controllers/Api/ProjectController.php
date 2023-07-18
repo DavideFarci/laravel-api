@@ -18,8 +18,8 @@ class ProjectController extends Controller
         $projects = Project::with('type', 'languages')->paginate(5);
         return response()->json([
             'success'   => true,
-            'data'      => $projects,
-        ]);;
+            'results'   => $projects,
+        ]);
     }
 
     /**
@@ -30,10 +30,10 @@ class ProjectController extends Controller
      */
     public function show($slug)
     {
-        $project = Project::where('slug', $slug)->firstOrFail();
+        $project = Project::where('slug', $slug)->first();
         return response()->json([
             'success'   => $project ? true : false,
-            'data'      => $project,
+            'results'   => $project,
         ]);
     }
 }
