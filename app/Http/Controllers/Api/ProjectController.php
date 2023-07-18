@@ -13,9 +13,14 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::with('type', 'languages')->paginate(5);
+        // filtro risultati
+        // gestione parametro q (parametro di ricerca)
+        $searchStr = $request->query('q', '');
+
+        $projects = Project::with('type', 'languages')->where('title', 'LIKE', "%${searchStr}%")->paginate(3);
+
         return response()->json([
             'success'   => true,
             'results'   => $projects,
